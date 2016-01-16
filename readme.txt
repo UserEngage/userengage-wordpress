@@ -1,5 +1,4 @@
 === UserEngage.io Integration ===
-
 Contributors: UserEngage.io
 Tags: livechat, userengage, user engage, user engagement,
 Requires at least: 3.4.1
@@ -22,3 +21,8 @@ UserEngage.io Integration plugin enables you to add Livechat features to Your we
 = I need plugin support. Where should I ask questions? =
 
 https://userengage.io/ || contact@userengage.io
+
+== Changelog ==
+
+= 1.0 =
+* First version. Full integration with UserEngage.io
