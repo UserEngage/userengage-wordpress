@@ -25,8 +25,6 @@ License: GPLv2 or later
 
 */
 
-require_once('wp-updates-plugin.php');
-new WPUpdatesPluginUpdater_1401( 'http://wp-updates.com/api/2/plugin', plugin_basename(__FILE__));
 
 function load_css_wp_admin_style() {
 	wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', false, '1.0.0' );
