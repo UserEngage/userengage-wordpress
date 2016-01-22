@@ -28,12 +28,11 @@ License: GPLv2 or later
 require_once('wp-updates-plugin.php');
 new WPUpdatesPluginUpdater_1401( 'http://wp-updates.com/api/2/plugin', plugin_basename(__FILE__));
 
-add_action('admin_head', 'ue__css');
-
-function ue__css() { ?>
-  <link rel="stylesheet" href="<?php  echo plugin_dir_url( __FILE__ ); ?>assets/css/style.css" type="text/css" media="all" />
-  <?php
+function load_css_wp_admin_style() {
+        wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', false, '1.0.0' );
+        wp_enqueue_style( 'custom_wp_admin_css' );
 }
+add_action( 'admin_enqueue_scripts', 'load_css_wp_admin_style' );
 
 function ue_widget ($meta) {
 
