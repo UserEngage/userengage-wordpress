@@ -1,27 +1,27 @@
 <?php
 
 /*
-Plugin Name: UserEngage.io Plugin
-Description: UserEngage.io Plugin for Wordpress.
+Plugin Name: UserEngage Plugin
+Description: UserEngage Plugin for Wordpress.
 Version: 1.0
 Author: UserEngage
 Author URI: https://www.userengage.io
 License: GPLv2 or later
 */
-/*  Copyright 2014  UserEngage.io
+/*	Copyright 2014 UserEngage
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License, version 2, as
+	published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
 
@@ -29,15 +29,16 @@ require_once('wp-updates-plugin.php');
 new WPUpdatesPluginUpdater_1401( 'http://wp-updates.com/api/2/plugin', plugin_basename(__FILE__));
 
 function load_css_wp_admin_style() {
-        wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', false, '1.0.0' );
-        wp_enqueue_style( 'custom_wp_admin_css' );
+	wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', false, '1.0.0' );
+	wp_enqueue_style( 'custom_wp_admin_css' );
 }
 add_action( 'admin_enqueue_scripts', 'load_css_wp_admin_style' );
+
 
 function ue_widget ($meta) {
 
 	global $user_login , $user_email;
-      get_currentuserinfo();
+	get_currentuserinfo();
 
 	$output = "
 	<script>
@@ -45,13 +46,17 @@ function ue_widget ($meta) {
 			apiKey: \"$meta\",
 			name: \"$user_login\",
 			email: \"$user_email\"
-    	};
-	</script>" .
-	"<script src=\"https://widget.userengage.io/widget.js\"></script>";
+	};
+	</script>";
 
-    echo $output;
+	echo $output;
 }
 
+function widget_js() {
+	wp_enqueue_script( 'script-name', 'https://widget.userengage.io/widget.js', array(), null, true );
+}
+
+add_action( 'wp_enqueue_scripts', 'widget_js' );
 
 if ( !class_exists( 'UserEngageScripts' ) ) {
 
