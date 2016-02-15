@@ -26,11 +26,11 @@ License: GPLv2 or later
 */
 
 
-function load_css_wp_admin_style() {
+function ue_admin_style() {
 	wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', false, '1.0.0' );
 	wp_enqueue_style( 'custom_wp_admin_css' );
 }
-add_action( 'admin_enqueue_scripts', 'load_css_wp_admin_style' );
+add_action( 'admin_enqueue_scripts', 'ue_admin_style' );
 
 
 function ue_widget ($meta) {
@@ -50,11 +50,11 @@ function ue_widget ($meta) {
 	echo $output;
 }
 
-function widget_js() {
-	wp_enqueue_script( 'script-name', 'https://widget.userengage.io/widget.js', array(), null, true );
+function ue_widget_js() {
+	wp_enqueue_script( 'UserEngage', 'https://widget.userengage.io/widget.js', array(), null, true );
 }
 
-add_action( 'wp_enqueue_scripts', 'widget_js' );
+add_action( 'wp_enqueue_scripts', 'ue_widget_js' );
 
 if ( !class_exists( 'UserEngageScripts' ) ) {
 
@@ -62,18 +62,18 @@ if ( !class_exists( 'UserEngageScripts' ) ) {
 	class UserEngageScripts {
 
 		function UserEngageScripts() {
-			add_action( 'admin_init', array( &$this, 'admin_init' ) );
-			add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
-			add_action( 'wp_head', array( &$this, 'wp_head' ) );
+			add_action( 'admin_init', array( &$this, 'ue_admin_init' ) );
+			add_action( 'admin_menu', array( &$this, 'ue_admin_menu' ) );
+			add_action( 'wp_head', array( &$this, 'ue_wp_head' ) );
 		}
 
-		function admin_init() {
+		function ue_admin_init() {
 			register_setting( 'ue-apiKey', 'ue__apiKey', 'trim' );
 		}
 
-		function admin_menu() {
+		function ue_admin_menu() {
 			add_menu_page(
-			'UserEngage.io' ,
+			'UserEngage.io',
 			'UserEngage.io',
 			'manage_options',
 			__FILE__, array( &$this, 'ue__panel' ),
@@ -81,7 +81,7 @@ if ( !class_exists( 'UserEngageScripts' ) ) {
 			);
 		}
 
-		function wp_head() {
+		function ue_wp_head() {
 			$meta = get_option( 'ue__apiKey', '' );
 				if ( $meta != '' ) {
 					ue_widget($meta);
