@@ -13,8 +13,10 @@ UserEngage.io Integration plugin enables you to add Livechat features to Your we
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/userengage` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Use the UserEngage.io screen to configure the plugin
+2. Activate the plugin through the 'Plugins' screen in WordPress
+3. Use the UserEngage.io screen to configure the plugin
+
+or download form WordPress.org plugin directory: https://wordpress.org/plugins/userengage-live-chat-marketing-automation-integration/
 
 == Frequently Asked Questions ==
 
